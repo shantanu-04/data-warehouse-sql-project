@@ -1,11 +1,10 @@
 /*
 Stored Procedure: Load Silver Layer (Bronze -> Silver)
 
-Script Purpose: This stored procedure performs the ETL (Extract, Transform, Load) process to populate the 'silver' schema tables from the 'bronze' schema.
-	
-Actions :
-		- Truncates Silver tables.
-		- Inserts transformed and cleansed data from Bronze into Silver tables.
+Script Purpose: This stored procedure performs the ETL (Extract, Transform, Load) process to fill the 'silver' schema tables from the 'bronze' schema tables.
+There are two main actions:-
+- Truncate silver tables
+- Insert transformed and cleansed data from Bronze to Silver tables.
 
 Usage Example: EXEC Silver.load_silver;
 */
@@ -15,7 +14,6 @@ BEGIN
     DECLARE @batch_start_time DATETIME, @batch_end_time DATETIME; 
     BEGIN TRY
         SET @batch_start_time = GETDATE();
-        PRINT '================================================';
         PRINT 'Loading Silver Layer';
         PRINT '================================================';
 
@@ -95,7 +93,7 @@ BEGIN
 			) AS prd_end_dt -- Calculate end date as one day before the next start date
 		FROM bronze.crm_prd_info;
 
-        -- Loading crm_sales_details
+        	-- Loading crm_sales_details
 		PRINT '>> Truncating Table: silver.crm_sales_details';
 		TRUNCATE TABLE silver.crm_sales_details;
 		PRINT '>> Inserting Data Into: silver.crm_sales_details';
@@ -139,7 +137,7 @@ BEGIN
 			END AS sls_price
 		FROM bronze.crm_sales_details;
 
-        -- Loading erp_cust_az12
+        	-- Loading erp_cust_az12
 		PRINT '>> Truncating Table: silver.erp_cust_az12';
 		TRUNCATE TABLE silver.erp_cust_az12;
 		PRINT '>> Inserting Data Into: silver.erp_cust_az12';
@@ -168,7 +166,7 @@ BEGIN
 		PRINT 'Loading ERP Tables';
 		PRINT '------------------------------------------------';
 
-        -- Loading erp_loc_a101
+        	-- Loading erp_loc_a101
 		PRINT '>> Truncating Table: silver.erp_loc_a101';
 		TRUNCATE TABLE silver.erp_loc_a101;
 		PRINT '>> Inserting Data Into: silver.erp_loc_a101';
