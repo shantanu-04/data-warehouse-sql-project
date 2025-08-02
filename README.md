@@ -10,7 +10,7 @@ The process is broken down into three distinct layers:
 1. Bronze Layer
 The initial layer serves as a raw data repository. Data is extracted directly from the source CSV files and loaded into tables without any transformations. This layer acts as a reliable backup of the source data, using a TRUNCATE and INSERT load method for simplicity and efficiency.
 
-2. Silver Layer
+3. Silver Layer
 In this layer, the data from the Bronze layer undergoes a series of crucial transformations. This includes:
 - Data Cleaning: Handling missing values and correcting inconsistencies.
 - Standardization & Normalization: Ensuring data is in a uniform format.
